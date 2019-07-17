@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO">
+    <Appenders>
+        <File name="LogToFile" fileName="DBServ.log">
+            <PatternLayout>
+                <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
+            </PatternLayout>
+        </File>
+        <JDBC name="databaseAppender" tableName="LOGGING_TABLE">
+			<ConnectionFactory class="com.revature.datalayer.ConnFactory" method="getLoggerConnection" />
+			<Column name="EVENT_DATE" isEventTimestamp="true" />
+			<Column name="LOG_LEVEL" pattern="%level" />
+			<Column name="LOGGER" pattern="%logger" />
+			<Column name="MSG" pattern="%message" />
+			<Column name="THROWABLE" pattern="%ex{full}" />
+		</JDBC>
+        
+    </Appenders>
+    <Loggers>
+        <!-- avoid duplicated logs with additivity=false -->
+        <Logger name="com.revature.datalayer.DealershipDBService" level="INFO" additivity="false">
+            <AppenderRef ref="LogToFile"/>
+        </Logger>
+        <Logger name="com.revature.datalayer.DealershipDBService" level="TRACE" additivity="false">
+            <AppenderRef ref="databaseAppender"/>
+        </Logger>
+        <Root>
+        	<appender-ref ref="databaseAppender" level="ERROR"/>
+            <AppenderRef ref="LogToFile" level="ALL"/>
+        </Root>
+    </Loggers>
+</Configuration>
