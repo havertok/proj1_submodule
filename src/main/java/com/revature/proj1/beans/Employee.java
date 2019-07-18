@@ -26,6 +26,7 @@ public class Employee {
 		this.fname = fname;
 		this.lname = lname;
 		this.managername = managername;
+		this.isManager = false;
 		myReimbursements = new ArrayList<Reimbursement>();
 		underlings = new ArrayList<Employee>();
 	}

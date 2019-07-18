@@ -32,7 +32,7 @@ public class ConnFactory {
 			props.load(new FileReader("database.properties"));
 			//We can read in a file, in this case we made a databse.properties file and are passing it in
 			//via a Properties object (which uses a file reader to read the actual file).
-			
+
 			Class.forName(props.getProperty("driver"));
 			conn = DriverManager.getConnection(props.getProperty("url"), 
 					props.getProperty("usr"), props.getProperty("password"));

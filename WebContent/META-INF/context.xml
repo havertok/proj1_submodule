@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+	<!-- Specify a JDBC datasource -->
+	<Resource name="eorevdb" auth="Container"
+		type="javax.sql.DataSource" username="adminman" password="abc123"
+		driverClassName="oracle.jdbc.driver.OracleDriver"
+		url="jdbc:oracle:thin:@june-10-java-eo.c472tpig8r7o.us-east-2.rds.amazonaws.com:1521:EOREVDB"
+		maxActive="10" maxIdle="4" />
+
+</Context>

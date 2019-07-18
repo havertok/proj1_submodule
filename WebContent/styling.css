@@ -1,0 +1,47 @@
+.bright-text{
+    color: #ffcb9a;
+}
+
+.container{
+    height: 100vh;
+}
+
+.layout{
+    color: #d1e8e2;
+    background: rgba(17, 100, 102, 0.3);
+    border-radius: 2%;
+    box-shadow: #2c3531;
+}
+
+.formDiv{
+    color: #d1e8e2;
+    background: rgba(17, 100, 102, 0.4);
+    border-radius: 2%;
+    box-shadow: #2c3531;
+}
+
+.btn-primary{
+    background-color: #d9b08c;
+    border: 2px;
+    border-color: #c9a003;
+    box-shadow: none;
+}
+
+.btn-primary:hover{
+    background-color: #ffcb9a;
+}
+
+.btn-primary:active, .btn-primary:focus{
+    outline-color: #d1e8e2 !important;
+    color: #d1e8e2;
+    box-shadow: none;
+}
+
+.profile{
+    width: 80vh;
+}
+
+body{
+    background-image: url("background.png");
+    background-size: auto;
+}
