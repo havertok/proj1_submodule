@@ -36,7 +36,7 @@ public class ReimbursementDAOTests {
 		ArrayList<Reimbursement> reimIdList = new ArrayList<>();
 		reimIdList = reimImp.getMyReimList("User"); //should give 2
 		for(Reimbursement r : reimIdList) {
-			System.out.println("ID: " + r.getId());
+			//System.out.println("Reim: " + r);
 		}
 		assertEquals(reimIdList.isEmpty(), false);
 		reimIdList = reimImp.getApprovedReimsByManName("Billy");//no such user exists :. the list should be empty

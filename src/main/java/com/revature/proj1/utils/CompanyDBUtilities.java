@@ -64,8 +64,11 @@ public class CompanyDBUtilities {
 		emp = getEmpDAO().getEmployeeByName(uname);
 		if(emp != null) {
 			emp.setMyReimbursements(getReimDAO().getMyReimList(uname));
+			emp.addUnderlings(getEmpDAO().getUnderlings(uname));
 		}
 		return emp;
 	}
+	
+	//TODO: Method to return full underling list, maybe.
 
 }

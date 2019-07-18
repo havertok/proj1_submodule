@@ -71,7 +71,7 @@ public class ReimbursementDAOImplementor implements ReimbursementDAOInterface {
 	public void approveReimbursement(Reimbursement r) {
 		String sql = "{call APPROVE_REIM(?,?)";
 		r.setStatus(1);
-		System.out.println("===="+r.getId()+"====" + ":::" +r.getApprovingManager());
+		//System.out.println("===="+r.getId()+"====" + ":::" +r.getApprovingManager());
 		try (Connection conn = cF.getConnection()){
 			CallableStatement call = conn.prepareCall(sql);
 			call.setInt(1, r.getId());
@@ -125,10 +125,26 @@ public class ReimbursementDAOImplementor implements ReimbursementDAOInterface {
 		return reimList;
 	}
 	
-	//returns a list of all integers (Reimbursement IDs) that are on the approved table
+	//returns a list of all integers (Reimbursement IDs) that are approved
 	public ArrayList<Reimbursement> getApprovedReims(){
 		ArrayList<Reimbursement> reimList = new ArrayList<>();
-		
+		String sql = "SELECT * FROM REIMBURSEMENT WHERE STATUS = 1";
+		Reimbursement reim = null;
+		try(Connection conn = cF.getConnection()){
+			PreparedStatement prep = conn.prepareStatement(sql);
+			ResultSet rs = prep.executeQuery();
+			while(rs.next()) {
+				//Remember that id is the object's hashcode
+				reim = new Reimbursement(rs.getString("EMP_USERNAME"), rs.getInt("STATUS"),
+						rs.getDouble("AMOUNT"), rs.getString("NOTES"));
+				reimList.add(reim);
+			}
+			return reimList;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//log catastrophic failure
 		return null;
 	}
 	

@@ -5,10 +5,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import com.revature.proj1.beans.Employee;
+import com.revature.proj1.beans.Reimbursement;
+
+import oracle.jdbc.OracleTypes;
 
 public class EmployeeDAOImplementor implements EmployeeDAOInterface {
 	public static ConnFactory cF = ConnFactory.getInstance();
@@ -80,6 +84,31 @@ public class EmployeeDAOImplementor implements EmployeeDAOInterface {
 			e.printStackTrace();
 		}
 		return emp;
+	}
+	
+	public ArrayList<Employee> getUnderlings(String manName){
+		ArrayList<Employee> eList = new ArrayList<>();
+		Employee emp = null;
+		String sql = "{call GRAB_UNDERLINGS(?,?)";
+		try(Connection conn = cF.getConnection()){
+			CallableStatement call = conn.prepareCall(sql);
+			call.setString(1, manName);
+			call.registerOutParameter(2, OracleTypes.CURSOR); //Our SQL returns a cursor, jdbc needs to know that
+			call.execute(); //EXECUTE
+			ResultSet rs = (ResultSet) call.getObject(2);  //Convert our cursor into a result set
+			while(rs.next()) {
+				emp = new Employee(rs.getString("USERNAME"), rs.getString("USERPASS"), rs.getString("EMAIL"),
+						rs.getString("FIRSTNAME"), rs.getString("LASTNAME"), rs.getString("MANAGER_USERNAME"));
+				System.out.println("EmpDaoWhile ||  emp:: "+emp);
+				eList.add(emp);
+			}
+			System.out.println("EmpDao line 103:: "+eList);
+			return eList;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return eList;
 	}
 
 }

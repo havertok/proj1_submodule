@@ -9,14 +9,14 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.revature.proj1.beans.Employee;
+import com.revature.proj1.beans.Reimbursement;
 import com.revature.proj1.utils.Company;
 import com.revature.proj1.utils.CompanyDBUtilities;
 
 public class EmployeeDAOTests {
 	private static EmployeeDAOImplementor empImp = new EmployeeDAOImplementor();
-	private static HashMap<String, Employee> tempEmp = new HashMap<>();
-	HashMap<String, Employee> pulledMap;
-	static Employee testPass, e1, e2;
+	private static ReimbursementDAOImplementor reimImp = new ReimbursementDAOImplementor();
+	static Employee e1, e2, e3;
 	
 	@BeforeClass
 	public static void initEmpMap() {
@@ -24,68 +24,28 @@ public class EmployeeDAOTests {
 		//as null, but remain empty strings (not null) in java
 		e1 = new Employee("User","Pass","Email","Fname","Lname", null);
 		e2 = new Employee("User2","Pass2","Email2","Fname2","Lname2","User");
-		Employee e3 = new Employee("User3","Pass3","Email3","Fname3","Lname3","User2");
-		tempEmp.put(e1.getUsername(), e1);
-		tempEmp.put(e2.getUsername(), e2);
-		tempEmp.put(e3.getUsername(), e3);
-		empImp.pushEmployeeMap(tempEmp);//in the real world, CompanyDBUtils would do this
-//		for (Employee e : tempEmp.values()) {
-//			System.out.println(e);
-//		}
-//		System.out.println("=================BeforeClassDone===================");
+		e3 = new Employee("User3","Pass3","Email3","Fname3","Lname3","User2");
+		empImp.addEmployeeDB(e1);
+		empImp.addEmployeeDB(e2);
+		empImp.addEmployeeDB(e3);
 	}
 	
-	//We want to make sure that the maps we push/pull contain the same key,value pairs
 	@Test
-	public void ensureGrabMapIsSameAsPushMap() {
-		pulledMap = empImp.grabEmployeeMap();
-		
-		boolean noMatchKey = false;
-		for(String key : tempEmp.keySet()) {
-			if(!pulledMap.containsKey(key)) {
-				noMatchKey = true;
-			}
+	public void assertE1UnderlingListContainsE2() {
+		e1.addUnderlings(empImp.getUnderlings(e1.getUsername()));
+		for(Employee e: e1.getUnderlings()) {
+			System.out.println("assertE1 ::line 30 \n"+e);
 		}
-		assertEquals(noMatchKey, false);
-	}
-	
-	@Test
-	public void ensureKeyPairIsGood() {
-//		for(Employee e: tempEmp.values()) {
-//			System.out.println(e);
-//		}
-		pulledMap = empImp.grabEmployeeMap();
-//		System.out.println("Pulled the map");
-//		for(Employee e: pulledMap.values()) {
-//			System.out.println(e);
-//		}
-		for(String key : tempEmp.keySet()) {
-			assertEquals(tempEmp.get(key), pulledMap.get(key));
-		}
-	}
-	
-	//Tests that a password for an existing user, when changed, is properly updated
-	//also no constraint violations (not sure how to do that with junit)
-	@Test 
-	public void ensurePasswordIsChanged() {
-		testPass = new Employee("Testman","password","Email","Fname","Lname", "User2");
-		tempEmp.put(testPass.getUsername(), testPass);
-		empImp.pushEmployeeMap(tempEmp);
-		String ante = testPass.getPassword();
-		
-		tempEmp.get(testPass.getUsername()).setPassword("ChangedPassword");
-		empImp.pushEmployeeMap(tempEmp);
-		pulledMap = empImp.grabEmployeeMap();
-		assertNotEquals(ante, pulledMap.get(testPass.getUsername()).getPassword());
-	}
-	
-	//BeforeClass inits some vals, so this should be ok
-	@Test
-	public void ensureDatabaseAndCompanyBuildRelationShipsWorks() {
-		CompanyDBUtilities.grabAllMaps();
-		Company.buildRelations();
 		assertEquals(e1.getUnderlings().contains(e2), true);
-		assertEquals(e2.getUnderlings().contains(e1), false);
 	}
-
+	
+	@Test
+	public void assertAddAfterPasswordChangeChangesPassword() {
+		String ante = e1.getPassword();
+		e1.setPassword("cheesewhiz");
+		empImp.addEmployeeDB(e1);
+		Employee test = empImp.getEmployeeByName(e1.getUsername());
+		assertEquals(test.getPassword().equals(ante), false);
+	}
+	
 }

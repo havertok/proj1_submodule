@@ -92,8 +92,8 @@ public class Employee {
 	}
 
 	public void addUnderlings(List<Employee> underlist) {
-		isManager = true;
 		if (underlist != null) {
+			isManager = true;
 			this.underlings.addAll(underlist);
 		}
 	}
@@ -104,10 +104,6 @@ public class Employee {
 
 	public List<Employee> getUnderlings() {
 		return underlings;
-	}
-
-	public void setUnderlings(List<Employee> underlings) {
-		this.underlings = underlings;
 	}
 
 	public boolean isManager() {
