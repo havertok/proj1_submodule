@@ -3,6 +3,7 @@ package com.revature.proj1.datalayer;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -23,15 +24,19 @@ public class ConnFactory {
 		return cF;
 	}
 	
+	
+//	try (InputStream stream =
+//		       this.getClass().getResourceAsStream("/Configuration.properties")) {
+//		    properties.load(stream);
+//		}
 	public Connection getConnection() {
 		//System.out.println("in getConnection");
 		Connection conn = null;
 		//it is the DriverManager that gives us a connection DriverManager.getConnection(url, username, password)
 		Properties props = new Properties();
 		try {
-			props.load(new FileReader("database.properties"));
-			//We can read in a file, in this case we made a databse.properties file and are passing it in
-			//via a Properties object (which uses a file reader to read the actual file).
+			InputStream stream = this.getClass().getResourceAsStream("/database.properties");
+			props.load(stream);
 
 			Class.forName(props.getProperty("driver"));
 			conn = DriverManager.getConnection(props.getProperty("url"), 

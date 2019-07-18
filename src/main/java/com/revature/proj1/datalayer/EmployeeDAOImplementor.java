@@ -99,10 +99,10 @@ public class EmployeeDAOImplementor implements EmployeeDAOInterface {
 			while(rs.next()) {
 				emp = new Employee(rs.getString("USERNAME"), rs.getString("USERPASS"), rs.getString("EMAIL"),
 						rs.getString("FIRSTNAME"), rs.getString("LASTNAME"), rs.getString("MANAGER_USERNAME"));
-				System.out.println("EmpDaoWhile ||  emp:: "+emp);
+				//System.out.println("EmpDaoWhile ||  emp:: "+emp);
 				eList.add(emp);
 			}
-			System.out.println("EmpDao line 103:: "+eList);
+			//System.out.println("EmpDao line 103:: "+eList);
 			return eList;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
