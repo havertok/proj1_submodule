@@ -59,12 +59,17 @@ public class CompanyDBUtilities {
 	}
 	
 	//START NEW METHODS 7/17 NO-STATE-IN-JAVA
+	//Tempted to call this recursively to fill out the whole chain of command.  
 	public static Employee getEmployeeByName(String uname) {
 		Employee emp = null;
 		emp = getEmpDAO().getEmployeeByName(uname);
 		if(emp != null) {
 			emp.setMyReimbursements(getReimDAO().getMyReimList(uname));
 			emp.addUnderlings(getEmpDAO().getUnderlings(uname));
+			for(Employee e : emp.getUnderlings()) {
+				e.setMyReimbursements(getReimDAO().getMyReimList(e.getUsername()));
+				e.addUnderlings(getEmpDAO().getUnderlings(e.getUsername()));
+			}
 		}
 		return emp;
 	}

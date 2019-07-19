@@ -2,8 +2,9 @@ let Employee = {};
 
 window.onload = function (){
     fillProfile();
-    //add func to display reimbursements
     getUnderlings();
+    console.log("before getMyReims()");
+    getMyReims();
 }
 
 function fillProfile(){
@@ -21,7 +22,6 @@ function fillProfile(){
             document.getElementById("fullname").innerText = user.lname+", "+user.fname;
             document.getElementById("email").innerText = "Email: "+user.email;
             document.getElementById("managername").innerText = "Suzerain: "+user.managername;
-            document.getElementById("pageTitle").innerText = `Profile of ${user.username}`;
         }
     })
 }
@@ -43,9 +43,11 @@ function getUnderlings(){
             }
         }
     })
+    console.log("finished getUnderlings()");
 }
 
 function getMyReims(){
+    console.log("getMyReims has been called.")
     fetch("http://localhost:8089/proj1/reimbursements")
     .then(function(response){
         return response.json();
@@ -54,24 +56,23 @@ function getMyReims(){
         if(data === null){
             alert("Data response for reimbursements was null");
         } else {
-            let reimlist = document.getElementById("underlinglist");
+            let reimlist = document.getElementById("reimlist");
             for(let i = 0; i < data.length; i++){
-               let reim = document.createElement("li")
-               reim.innerText = reimTemplateBuilder(data[i], i);
-               reimlist.appendChild(underman);
+                let reim = document.createElement("li");
+                document.reim.setAttribute("id", `reimitem${i}`);
+                reim.innerHTML = reimTemplateBuilder(data[i]);
+                reimlist.appendChild(reim);
             }
         }
     })
 }
 
-function reimTemplateBuilder(reimObj, number){
+function reimTemplateBuilder(reimObj){
     let lux = 
-    `<li id="reimitem${number}">
-        <span> Status: ${reimObj.status} for ${reimOjb.amount} \n
+        `<span> Status: ${reimObj.status} for ${reimOjb.amount} \n
             by: ${reimObj.empUsername} on: ${reimObj.dateMade} \n
             Reason: ${reimObj.notes}
         </span>
-        <img src="" alt="Reciept image goes here">
-    </li>`;
+        <img src="" alt="Reciept image goes here">`
     return lux;
 }

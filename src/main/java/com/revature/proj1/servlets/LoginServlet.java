@@ -1,6 +1,7 @@
 package com.revature.proj1.servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import com.revature.proj1.beans.Credentials;
 import com.revature.proj1.beans.Employee;
+import com.revature.proj1.beans.Reimbursement;
 import com.revature.service.AuthenticationService;
 
 /**
@@ -55,6 +57,7 @@ public class LoginServlet extends HttpServlet {
 			} else {
 				session.setAttribute("managername", "N/A");
 			}
+			session.setAttribute("myReimbursements", emp.getMyReimbursements());
 			session.setAttribute("validUser", emp.getUsername());
 			response.sendRedirect("mainmenu");
 		} else {

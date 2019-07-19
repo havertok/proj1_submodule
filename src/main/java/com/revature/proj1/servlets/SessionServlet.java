@@ -1,6 +1,7 @@
 package com.revature.proj1.servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.proj1.beans.Employee;
+import com.revature.proj1.beans.Reimbursement;
 
 @WebServlet("/session")
 public class SessionServlet extends HttpServlet {
@@ -29,7 +31,9 @@ public class SessionServlet extends HttpServlet {
 				String lname = session.getAttribute("lname").toString();
 				String email = session.getAttribute("email").toString();
 				String supervisor = session.getAttribute("managername").toString();
+				ArrayList<Reimbursement> myReims = (ArrayList<Reimbursement>) session.getAttribute("myReimbursements");
 				Employee emp = new Employee(username, null, email, fname, lname, supervisor);
+				emp.setMyReimbursements(myReims);
 				//This is what sends our JSON object
 				resp.getWriter().write((new ObjectMapper()).writeValueAsString(emp));
 			} catch (Exception e) {
