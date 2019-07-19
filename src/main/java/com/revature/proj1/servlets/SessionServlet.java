@@ -22,6 +22,7 @@ public class SessionServlet extends HttpServlet {
 	// JSESSIONID.
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		resp.setHeader("Cache-Control", "private, no-store, no-cache, must-revalidate"); //Should disable caching
 		
 		HttpSession session = req.getSession(false);
 		if (session != null && session.getAttribute("username") != null) {

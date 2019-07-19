@@ -3,7 +3,6 @@ let Employee = {};
 window.onload = function (){
     fillProfile();
     getUnderlings();
-    console.log("before getMyReims()");
     getMyReims();
 }
 
@@ -43,11 +42,9 @@ function getUnderlings(){
             }
         }
     })
-    console.log("finished getUnderlings()");
 }
 
 function getMyReims(){
-    console.log("getMyReims has been called.")
     fetch("http://localhost:8089/proj1/reimbursements")
     .then(function(response){
         return response.json();
@@ -59,7 +56,7 @@ function getMyReims(){
             let reimlist = document.getElementById("reimlist");
             for(let i = 0; i < data.length; i++){
                 let reim = document.createElement("li");
-                document.reim.setAttribute("id", `reimitem${i}`);
+                reim.setAttribute("id", `reimitem${i}`);
                 reim.innerHTML = reimTemplateBuilder(data[i]);
                 reimlist.appendChild(reim);
             }
@@ -68,11 +65,12 @@ function getMyReims(){
 }
 
 function reimTemplateBuilder(reimObj){
+    console.log(reimObj);
     let lux = 
-        `<span> Status: ${reimObj.status} for ${reimOjb.amount} \n
-            by: ${reimObj.empUsername} on: ${reimObj.dateMade} \n
+        `<span> Status: ${reimObj.status} for ${reimObj.amount} <br>
+            by: ${reimObj.empUsername} on: ${reimObj.dateMade} <br>
             Reason: ${reimObj.notes}
-        </span>
+        </span> <br>
         <img src="" alt="Reciept image goes here">`
     return lux;
 }

@@ -1,9 +1,16 @@
 package com.revature.proj1.beans;
 
 import java.io.File;
+import java.io.Serializable;
 import java.sql.Date;
 
-public class Reimbursement {
+public class Reimbursement implements Serializable {
+	
+	/**
+	 * I implement Serializable, for employee contains a list of Reimbursements, they become serialized
+	 * as inner classes when written as a JSON object
+	 */
+	private static final long serialVersionUID = 1L;
 	
 	private int id;
 	private String empUsername;
