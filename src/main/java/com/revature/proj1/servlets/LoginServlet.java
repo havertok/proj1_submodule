@@ -32,8 +32,7 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.getRequestDispatcher("login.html").forward(request, response);
 	}
 
@@ -41,12 +40,11 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		Credentials creds = new Credentials(request.getParameter("username"), request.getParameter("password"));
 		Employee emp = as.authenticateEmployee(creds);
-		System.out.println("LoginServlet::44" + emp);
+		//System.out.println("LoginServlet::44" + emp);
 		if (emp != null) {
 			session.setAttribute("username", emp.getUsername());
 			session.setAttribute("fname", emp.getFname());

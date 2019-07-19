@@ -6,23 +6,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.revature.proj1.beans.Employee;
-import com.revature.proj1.utils.CompanyDBUtilities;
 
 /**
- * Servlet implementation class ReimbursementJSONServlet
+ * Servlet implementation class UnderlingReimsJSONServlet
  */
-@WebServlet("/reimbursements")
-public class ReimbursementJSONServlet extends HttpServlet {
+@WebServlet(description = "Special Reim Servlet that needs username as a param in request", urlPatterns = { "/underlingreims" })
+public class UnderlingReimsJSONServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReimbursementJSONServlet() {
+    public UnderlingReimsJSONServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,10 +26,8 @@ public class ReimbursementJSONServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession(false);
-		String username = session.getAttribute("username").toString();
-		Employee emp = CompanyDBUtilities.getEmployeeByName(username);
-		response.getWriter().write((new ObjectMapper()).writeValueAsString(emp.getMyReimbursements()));
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
