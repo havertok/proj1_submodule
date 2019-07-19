@@ -1,41 +1,42 @@
 package com.revature.proj1.servlets;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-/**
- * Grabs and serves an employe object in JSON format, to be called by javascript functs attached to respective pages
- */
-@WebServlet("/EmployeJSONServlet")
-public class EmployeJSONServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.revature.proj1.beans.Employee;
+import com.revature.proj1.utils.CompanyDBUtilities;
+
+@WebServlet("/getunderlings")
+public class EmployeeJSONServlet extends HttpServlet {
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public EmployeJSONServlet() {
+    public EmployeeJSONServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		HttpSession session = request.getSession(false);
+		String username = session.getAttribute("username").toString();
+		Employee emp = CompanyDBUtilities.getEmployeeByName(username);
+		response.getWriter().write((new ObjectMapper()).writeValueAsString(emp.getUnderlings()));
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * Will be used to send out a list of underlings
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		response.sendRedirect("mainmenu.html");
 	}
-
 }
