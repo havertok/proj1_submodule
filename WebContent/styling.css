@@ -4,6 +4,7 @@
 
 .container{
     height: 100vh;
+    width: 95vw;
 }
 
 .layout{
@@ -44,4 +45,12 @@
 body{
     background-image: url("background.png");
     background-size: auto;
+}
+/*
+all rows will occupy 100% of parent width
+and be a minimun of 30% of it's height;
+*/
+row{
+    width: 100%;
+    min-height: 30%;
 }

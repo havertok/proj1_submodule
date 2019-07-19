@@ -59,7 +59,7 @@ function getMyReims(){
             let reimlist = document.getElementById("reimlist");
             for(let i = 0; i < data.length; i++){
                 let reim = document.createElement("li");
-                reim.setAttribute("id", `reimitem${i}`);
+                document.reim.setAttribute("id", `reimitem${i}`);
                 reim.innerHTML = reimTemplateBuilder(data[i]);
                 reimlist.appendChild(reim);
             }
@@ -69,8 +69,8 @@ function getMyReims(){
 
 function reimTemplateBuilder(reimObj){
     let lux = 
-        `<span> Status: ${reimObj.status} for ${reimOjb.amount} <br>
-            by: ${reimObj.empUsername} on: ${reimObj.dateMade} <br>
+        `<span> Status: ${reimObj.status} for ${reimOjb.amount} \n
+            by: ${reimObj.empUsername} on: ${reimObj.dateMade} \n
             Reason: ${reimObj.notes}
         </span>
         <img src="" alt="Reciept image goes here">`
