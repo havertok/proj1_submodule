@@ -34,7 +34,7 @@ public class ReimbursementJSONServlet extends HttpServlet {
 		HttpSession session = request.getSession(false);
 		String username = session.getAttribute("username").toString();
 		Employee emp = CompanyDBUtilities.getEmployeeByName(username);
-		System.out.println("DoGet @ ReimbursementJSONServlet \n"+emp.getMyReimbursements());
+		//System.out.println("DoGet @ ReimbursementJSONServlet \n"+emp.getMyReimbursements());
 		response.getWriter().write((new ObjectMapper()).writeValueAsString(emp.getMyReimbursements()));
 	}
 

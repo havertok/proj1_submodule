@@ -3,7 +3,6 @@ let Employee = {};
 window.onload = function (){
     fillProfile();
     getUnderlings();
-    console.log("before getMyReims()");
     getMyReims();
 }
 
@@ -43,11 +42,9 @@ function getUnderlings(){
             }
         }
     })
-    console.log("finished getUnderlings()");
 }
 
 function getMyReims(){
-    console.log("getMyReims has been called.")
     fetch("http://localhost:8089/proj1/reimbursements")
     .then(function(response){
         return response.json();
