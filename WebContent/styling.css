@@ -1,36 +1,54 @@
-.bright-text{
-    color: #ffcb9a;
-}
+:root {
+    --main-bg-color: #2c3531; /* Main color of bg img */
+    --main-container-color: rgba(13, 77, 72, 0.5);
+    --main-inner-color: rgba(17, 100, 102, .7);
+    --bright-text: #ffcb9a;
+    --dark-text: #bb9b7d;
+  }  
 
 .container{
-    height: 100vh;
-    width: 100vw;
+    min-height: 100vh;
+}
+
+.layout, .formDiv{
+    
 }
 
 .layout{
     color: #d1e8e2;
-    background: rgba(17, 100, 102, 0.3);
+    background: var(--main-container-color);
     border-radius: 5px;
     box-shadow: #2c3531;
-    width: 100%;
+    padding: 10px;;
 }
 
 .formDiv{
     color: #d1e8e2;
-    background: rgba(17, 100, 102, 0.4);
+    background: var(--main-container-color);
     border-radius: 5px;
     box-shadow: #2c3531;
+}
+
+.inner{
+    background: var(--main-inner-color);
+    min-height: 90%;
+    min-width: 90%;
+    border: 3px ridge var(--dark-text);
+    border-radius: 3px;
+    margin: auto;
+    padding: 10px;
 }
 
 .btn-primary{
     background-color: #d9b08c;
     border: 2px;
     border-color: #c9a003;
+    border-radius: 2px;
     box-shadow: none;
 }
 
 .btn-primary:hover{
-    background-color: #ffcb9a;
+    background-color: var(--bright-text);
 }
 
 .btn-primary:active, .btn-primary:focus{
@@ -42,16 +60,24 @@
 .profile{
     width: 80vh;
 }
+/*
+all rows will occupy 100% of parent width
+and be a minimun of 30% of it's height;
+*/
+.row{
+    min-width: 100%;
+    min-height: 40%;
+}
 
 body{
     background-image: url("background.png");
     background-size: auto;
 }
-/*
-all rows will occupy 100% of parent width
-and be a minimun of 30% of it's height;
-*/
-row{
-    width: 100%;
-    min-height: 30%;
+
+legend{
+    color: #ffcb9a;
+}
+
+ul{
+    list-style: none;
 }
