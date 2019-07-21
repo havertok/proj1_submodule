@@ -2,6 +2,7 @@ package com.revature.proj1.servlets;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -32,7 +33,9 @@ public class SessionServlet extends HttpServlet {
 				String lname = session.getAttribute("lname").toString();
 				String email = session.getAttribute("email").toString();
 				String supervisor = session.getAttribute("managername").toString();
-				ArrayList<Reimbursement> myReims = (ArrayList<Reimbursement>) session.getAttribute("myReimbursements");
+				
+				@SuppressWarnings("unchecked")
+				List<Reimbursement> myReims = (ArrayList<Reimbursement>) session.getAttribute("myReimbursements");
 				Employee emp = new Employee(username, null, email, fname, lname, supervisor);
 				emp.setMyReimbursements(myReims);
 				//This is what sends our JSON object

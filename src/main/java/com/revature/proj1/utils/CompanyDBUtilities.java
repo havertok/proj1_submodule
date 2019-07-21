@@ -50,6 +50,10 @@ public class CompanyDBUtilities {
 		getReimDAO().approveReimbursement(r);
 	}
 	
+	public static void addUpdateReim(Reimbursement r) {
+		getReimDAO().addReimbursementDB(r);
+	}
+	
 	public static ArrayList<Reimbursement> grabApprovedReimbursements() {
 		return getReimDAO().getApprovedReims();
 	}

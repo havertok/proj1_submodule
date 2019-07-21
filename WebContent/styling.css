@@ -18,7 +18,7 @@
     color: #d1e8e2;
     background: var(--main-container-color);
     border-radius: 5px;
-    box-shadow: #2c3531;
+    box-shadow: black;
     padding: 10px;;
 }
 
@@ -26,13 +26,13 @@
     color: #d1e8e2;
     background: var(--main-container-color);
     border-radius: 5px;
-    box-shadow: #2c3531;
+    box-shadow: black
 }
 
 .inner{
     background: var(--main-inner-color);
-    min-height: 90%;
-    min-width: 90%;
+    min-height: 100px;
+    min-width: 150px;
     border: 3px ridge var(--dark-text);
     border-radius: 3px;
     margin: auto;
@@ -59,14 +59,6 @@
 
 .profile{
     width: 80vh;
-}
-/*
-all rows will occupy 100% of parent width
-and be a minimun of 30% of it's height;
-*/
-.row{
-    min-width: 100%;
-    min-height: 40%;
 }
 
 body{

@@ -23,30 +23,30 @@
             </ul>
         </div>
         <div class="row">
-            <div class="inner col-6 layout">
+            <div class="inner col-sm-6 layout">
                 <ul id="underlinglist">
 
                 </ul>
             </div>
             <div class="col-1 gap"></div>
-            <div class="inner col-5 layout">
+            <div class="inner col-sm-5 layout">
                 <div id="employeeview">
 
                 </div>
             </div>
         </div>
         <div class="row layout">
-            <div class="inner col-5 layout">
+            <div class="inner col-sm-5 layout">
                 <ul id="reimlist">
 
                 </ul>
             </div>
-            <div class="col-1"></div>
-            <div class="col-6">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-6">
                 <h3>Submit a new Reimbursement Request</h3>
-                <form inner="inner" action="reimstatus" method="POST">
+                <form action="addnewreim" method="POST">
                     <legend>Amount:</legend>
-                    <input type="number" name="amount" id="amountInput">
+                    <input type="number" step="0.01" name="amount" id="amountInput">
                     <legend>Notes:</legend>
                     <input type="text" name="notes" id="noteInput">
                     <input name="submit" id="reimbursementRequest" class="btn btn-primary" type="submit" value="Submit">

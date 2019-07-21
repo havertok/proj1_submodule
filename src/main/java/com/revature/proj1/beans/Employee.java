@@ -1,9 +1,16 @@
 package com.revature.proj1.beans;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Employee {
+public class Employee implements Serializable {
+	
+	/**
+	 * I implement Serializable, for employee contains a list of Employees (underlings), they become serialized
+	 * as inner classes when written as a JSON object
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private String username;
 	private String password;

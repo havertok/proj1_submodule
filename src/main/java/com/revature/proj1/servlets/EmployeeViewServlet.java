@@ -39,8 +39,9 @@ public class EmployeeViewServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("Did Post EmpViewServ");
-		System.out.println("username was: "+request.getReader().readLine());
-		response.getWriter().write(new ObjectMapper().writeValueAsString("employee.html"));
+		String username = request.getReader().readLine();
+		System.out.println("request string was: "+username);
+		response.sendRedirect("employee.html");
 		
 	}
 

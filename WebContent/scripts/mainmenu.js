@@ -6,9 +6,9 @@ window.onload = function () {
     getMyReims();
 
     let  reimbutton = document.getElementById("reimbursementRequest");
-    reimbutton.addEventListener("click", function () {
-        getmyReims(session.getElementById("username"));
-    });
+    // reimbutton.addEventListener("click", function () {
+    //     getMyReims(session.getAttribute("username"));
+    // });
 }
 
 function fillProfile() {
@@ -63,23 +63,28 @@ function getUnderlings() {
 //Should make a fetch to a java servlet that will redirect to a new html page
 //Get the employee.html as a reponse, might be able to create a window with it.
 function getUserPage(uname) {
-    let usernameJSON = { username: uname};
-    console.log(JSON.stringify(usernameJSON));
+    let usernameJSON = { username: uname };
+    console.log(usernameJSON);
     fetch("http://localhost:8089/proj1/employeeview", {
         method: 'POST', 
-        body: JSON.stringify(usernameJSON),
+        body: uname,
         headers:{
           'Content-Type': 'application/json'
         }
       })
-      .then(response => console.log('Got Resp getUserName'))
-      .then(response => {
-          displaySelectedEmployeeReims(response, usernameJSON.username)
+      .then(function(response){
+          console.log("returning response.json()...");
+          return response;
+      })
+      .then(function(data) {
+          console.log("getUserPage data:"+data);
+          displaySelectedEmployeeReims(data, usernameJSON.username)
       });
       //.catch(error => console.error('Error:', error));
 }
 
 function displaySelectedEmployeeReims(template, username){
+    console.log("display Selected: "+template);
     let templateHTML = document.createElement("div");
     templateHTML.innerHTML = template;
 
@@ -108,10 +113,15 @@ function getMyReims() {
 }
 
 function reimTemplateBuilder(reimObj) {
-    //let date = reimObj.dateMade.toDateString();
+    let dateString;
+    let day = reimObj.dateMade.dayOfMonth;
+    let month = reimObj.dateMade.monthValue-1;
+    let year = reimObj.dateMade.year;
+    dateString = `${day}-${month}-${year}`;
     let lux =
         `<span> Status: ${reimObj.status} for ${reimObj.amount} <br>
-            by: ${reimObj.empUsername} on: ${reimObj.dateMade} <br>
+            by: ${reimObj.empUsername} on: ${dateString} <br>
+            Approving Manager: ${reimObj.status===1?reimObj.approvingManager:'N/A'}<br>
             Reason: ${reimObj.notes}
         </span> <br>
         <img src="" alt="Reciept image goes here">`

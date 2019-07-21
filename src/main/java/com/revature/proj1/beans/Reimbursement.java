@@ -3,6 +3,7 @@ package com.revature.proj1.beans;
 import java.io.File;
 import java.io.Serializable;
 import java.sql.Date;
+import java.time.LocalDate;
 
 public class Reimbursement implements Serializable {
 	
@@ -17,7 +18,7 @@ public class Reimbursement implements Serializable {
 	private String approvingManager; //used only when a reimbursement is approved
 	private int status;
 	private double amount;
-	private Date dateMade; //date in format "yyyy-mm-dd"
+	private LocalDate dateMade; //date in format "yyyy-mm-dd"
 	private String notes;
 	private File reciept;
 	
@@ -29,6 +30,7 @@ public class Reimbursement implements Serializable {
 		this.status = status;
 		this.amount = amount;
 		this.notes = notes; //stores a memo for what the reimbursement is for
+		this.dateMade = LocalDate.now();
 		this.id = this.hashCode();
 	}
 	
@@ -40,7 +42,7 @@ public class Reimbursement implements Serializable {
 		this.amount = amount;
 		this.notes = notes; //stores a memo for what the reimbursement is for
 		this.id = this.hashCode();
-		this.dateMade = Date.valueOf(date); //From java.sql, should work nicely with oracld DB
+		this.dateMade = LocalDate.parse(date); //From java.sql, should work nicely with oracld DB
 	}
 
 	public int getId() {
@@ -75,11 +77,11 @@ public class Reimbursement implements Serializable {
 		this.amount = amount;
 	}
 
-	public Date getDateMade() {
+	public LocalDate getDateMade() {
 		return dateMade;
 	}
 
-	public void setDateMade(Date dateMade) {
+	public void setDateMade(LocalDate dateMade) {
 		this.dateMade = dateMade;
 	}
 

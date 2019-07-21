@@ -2,6 +2,7 @@ package com.revature.proj1.datalayer;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -57,7 +58,7 @@ public class ReimbursementDAOImplementor implements ReimbursementDAOInterface {
 			call.setString(2, r.getEmpUsername());
 			call.setInt(3, r.getStatus());
 			call.setDouble(4, r.getAmount());
-			call.setDate(5, r.getDateMade());
+			call.setDate(5, Date.valueOf(r.getDateMade())); //SQL friendly format is Date
 			call.setString(6, r.getNotes());
 			call.execute();
 		} catch (SQLException e) {
@@ -114,7 +115,7 @@ public class ReimbursementDAOImplementor implements ReimbursementDAOInterface {
 				reim = new Reimbursement(rs.getString("EMP_USERNAME"), rs.getInt("STATUS"),
 						rs.getDouble("AMOUNT"), rs.getString("NOTES"));
 				reim.setApprovingManager(rs.getString("APPROVING_MANAGER"));
-				reim.setDateMade(rs.getDate("DATE_MADE"));
+				reim.setDateMade(rs.getDate("DATE_MADE").toLocalDate());
 				reimList.add(reim);
 			}
 			return reimList;
@@ -163,7 +164,7 @@ public class ReimbursementDAOImplementor implements ReimbursementDAOInterface {
 				reim = new Reimbursement(rs.getString("EMP_USERNAME"), rs.getInt("STATUS"),
 						rs.getDouble("AMOUNT"), rs.getString("NOTES"));
 				reim.setApprovingManager(rs.getString("APPROVING_MANAGER"));
-				reim.setDateMade(rs.getDate("DATE_MADE"));
+				reim.setDateMade(rs.getDate("DATE_MADE").toLocalDate());
 				reimList.add(reim);
 			}
 			return reimList;
