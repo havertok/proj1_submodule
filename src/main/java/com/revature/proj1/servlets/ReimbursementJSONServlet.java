@@ -31,7 +31,7 @@ public class ReimbursementJSONServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setHeader("Cache-Control", "private, no-store, no-cache, must-revalidate"); //should disable caching
+		//response.setHeader("Cache-Control", "private, no-store, no-cache, must-revalidate"); //should disable caching
 		
 		HttpSession session = request.getSession(false);
 		String username = session.getAttribute("username").toString();

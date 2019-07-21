@@ -1,31 +1,12 @@
-<!DOCTYPE html>
-<!-- This will display the current employee's (by session) underlings and their
-    respective reimbursements, somehow I will allow manager to reject approve them-->
-<html lang="en">
+<div id="underReimList">
+    <div id="underReim">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Employee View</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="styling.css">
-</head>
-
-<body>
-    <div class="container justify-content-center align-items-center">
-        <div class="d-flex row">
-            <div class="card-columns formDiv userCards">
-                <div class="card">
-                    <div class="card-body inner">
-                        <h5 class="userTitle">Title</h5>
-                        <p class="userReim">Content</p>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
-</body>
-
-</html>
+    <form action="POST">
+        <select name="setReimStatus" id="">
+            <option value="accept">Accept</option>
+            <option value="reject">Reject</option>
+        </select>
+        <input class="btn-primary" name="submit" type="submit">
+    </form>
+</div>

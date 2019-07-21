@@ -43,7 +43,7 @@ public class LoginServlet extends HttpServlet {
 	 *      response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setHeader("Cache-Control", "private, no-store, no-cache, must-revalidate"); //should disable caching
+		//response.setHeader("Cache-Control", "private, no-store, no-cache, must-revalidate"); //should disable caching
 		
 		HttpSession session = request.getSession();
 		Credentials creds = new Credentials(request.getParameter("username"), request.getParameter("password"));

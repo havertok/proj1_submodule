@@ -4,6 +4,11 @@ window.onload = function () {
     fillProfile();
     getUnderlings();
     getMyReims();
+
+    let  reimbutton = document.getElementById("reimbursementRequest");
+    reimbutton.addEventListener("click", function () {
+        getmyReims(session.getElementById("username"));
+    });
 }
 
 function fillProfile() {
@@ -42,6 +47,7 @@ function getUnderlings() {
                     underbutton.setAttribute("type", `submit`);
                     underbutton.setAttribute("id", `userbutton${i}`);
                     underbutton.setAttribute("class", `btn-primary`);
+                    underbutton.innerText = data[i].username
                     underbutton.addEventListener("click", function () {
                         getUserPage(data[i].username)
                     });
@@ -55,8 +61,29 @@ function getUnderlings() {
 }
 
 //Should make a fetch to a java servlet that will redirect to a new html page
-function getUserPage(username) {
-    alert(username);
+//Get the employee.html as a reponse, might be able to create a window with it.
+function getUserPage(uname) {
+    let usernameJSON = { username: uname};
+    console.log(JSON.stringify(usernameJSON));
+    fetch("http://localhost:8089/proj1/employeeview", {
+        method: 'POST', 
+        body: JSON.stringify(usernameJSON),
+        headers:{
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(response => console.log('Got Resp getUserName'))
+      .then(response => {
+          displaySelectedEmployeeReims(response, usernameJSON.username)
+      });
+      //.catch(error => console.error('Error:', error));
+}
+
+function displaySelectedEmployeeReims(template, username){
+    let templateHTML = document.createElement("div");
+    templateHTML.innerHTML = template;
+
+    document.getElementById("employeeview").appendChild(templateHTML);
 }
 
 function getMyReims() {
@@ -73,7 +100,7 @@ function getMyReims() {
                     let reim = document.createElement("li");
                     reim.setAttribute("id", `reimitem${i}`);
                     reim.innerHTML = reimTemplateBuilder(data[i]);
-                    console.log(reim);
+                    //console.log(reim);
                     reimlist.appendChild(reim);
                 }
             }

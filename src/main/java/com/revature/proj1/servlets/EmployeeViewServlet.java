@@ -1,40 +1,47 @@
 package com.revature.proj1.servlets;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 /**
- * Servlet implementation class MainMenuServlet
+ * Servlet implementation class EmployeeViewServlet
  */
-@WebServlet("/mainmenu")
-public class MainMenuServlet extends HttpServlet {
+@WebServlet("/employeeview")
+public class EmployeeViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MainMenuServlet() {
+    public EmployeeViewServlet() {
         super();
+        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//response.setHeader("Cache-Control", "private, no-store, no-cache, must-revalidate"); //should disable caching
-		
-		request.getRequestDispatcher("mainmenu.html").forward(request , response);
+		System.out.println("did get EmpViewServ");
+
+		response.sendRedirect("employee.html");
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		System.out.println("Did Post EmpViewServ");
+		System.out.println("username was: "+request.getReader().readLine());
+		response.getWriter().write(new ObjectMapper().writeValueAsString("employee.html"));
+		
 	}
 
 }

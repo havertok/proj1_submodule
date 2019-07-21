@@ -1,0 +1,8 @@
+                attach to userCards
+				
+				<div class="card${i}">
+                    <div class="card-body inner">
+                        <h5 class="userTitle">Title</h5>
+                        <p class="userReim">Content</p>
+                    </div>
+                </div>
