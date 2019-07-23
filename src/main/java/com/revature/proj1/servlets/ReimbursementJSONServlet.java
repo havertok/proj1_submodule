@@ -34,7 +34,8 @@ public class ReimbursementJSONServlet extends HttpServlet {
 		//response.setHeader("Cache-Control", "private, no-store, no-cache, must-revalidate"); //should disable caching
 		
 		HttpSession session = request.getSession(false);
-		String username = session.getAttribute("username").toString();
+		String username = request.getReader().readLine();
+		System.out.println("ReimsJSON doGet: Username="+username);
 		Employee emp = CompanyDBUtilities.getEmployeeByName(username);
 		//System.out.println("DoGet @ ReimbursementJSONServlet \n"+emp.getMyReimbursements());
 		response.getWriter().write((new ObjectMapper()).writeValueAsString(emp.getMyReimbursements()));
@@ -44,8 +45,27 @@ public class ReimbursementJSONServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		String username = request.getReader().readLine();
+		System.out.println("ReimJSON doPost|| username="+username);
+		Employee emp = CompanyDBUtilities.getEmployeeByName(username);
+		
+		response.getWriter().write((new ObjectMapper()).writeValueAsString(emp.getMyReimbursements()));
+	}
+	
+	//Will be called by the 
+	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		System.out.println("doPut ReimServlet\n");
+		String reimId = request.getReader().readLine();
+		String status = request.getParameter("toStatus");
+		int toStatus = 0;
+		System.out.println("Reimid="+reimId);
+		System.out.println("ReimId="+request.getParameter("reimId"));
+		if(status.equals("accept")) {
+			toStatus = 1;
+		} else if(status.equals("reject")) {
+			toStatus = 2;
+		}
+		System.out.println("toStats="+toStatus);
 	}
 
 }

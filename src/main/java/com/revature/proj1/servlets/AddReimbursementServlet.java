@@ -17,13 +17,13 @@ import com.revature.service.generateNewReimbursement;
  * Servlet implementation class ChangeReimbursementStatusServlet
  */
 @WebServlet(name = "addnewreim", urlPatterns = { "/addnewreim" })
-public class ChangeReimbursementStatusServlet extends HttpServlet {
+public class AddReimbursementServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ChangeReimbursementStatusServlet() {
+    public AddReimbursementServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -55,7 +55,9 @@ public class ChangeReimbursementStatusServlet extends HttpServlet {
 			}
 		}
 		System.out.println(newReim);
-		CompanyDBUtilities.addUpdateReim(newReim);
+		if(newReim != null) {
+			CompanyDBUtilities.addUpdateReim(newReim);
+		}
 		request.getRequestDispatcher("mainmenu.html").forward(request , response);
 	}
 

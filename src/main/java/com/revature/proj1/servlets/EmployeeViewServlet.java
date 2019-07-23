@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.revature.proj1.beans.Employee;
+import com.revature.proj1.utils.CompanyDBUtilities;
+
 
 /**
  * Servlet implementation class EmployeeViewServlet
@@ -25,23 +28,25 @@ public class EmployeeViewServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+	//Employee reims GET will return a list of all reimbursements, underling list will change the status of those reims
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("did get EmpViewServ");
-
-		response.sendRedirect("employee.html");
+		String username = request.getReader().readLine();
+		Employee emp = CompanyDBUtilities.getEmployeeByName(username);
+		
+		response.getWriter().write((new ObjectMapper()).writeValueAsString(emp.getMyReimbursements()));
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("Did Post EmpViewServ");
+		System.out.println("Did Post EmpViewServ POST");
 		String username = request.getReader().readLine();
-		System.out.println("request string was: "+username);
-		response.sendRedirect("employee.html");
+		System.out.println("username:"+username);
+		Employee emp = CompanyDBUtilities.getEmployeeByName(username);
+		
+		response.getWriter().write((new ObjectMapper()).writeValueAsString(emp.getMyReimbursements()));
 		
 	}
 
