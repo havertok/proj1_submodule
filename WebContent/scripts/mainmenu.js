@@ -4,9 +4,7 @@ window.onload = function () {
     fillProfile();
     getUnderlings();
 
-    // reimbutton.addEventListener("click", function () {
-    //     getMyReims(session.getAttribute("username"));
-    // });
+    
 }
 
 function fillProfile() {
@@ -40,8 +38,9 @@ function getUnderlings() {
                 alert("Data response for getUnderlings was null");
             } else {
                 let underlist = document.getElementById("underlinglist");
+                let managerView = document.getElementById("managerView");
                 if(data.length == 0){
-                    //Toggle display of manager submenu
+                    managerView.style.display = "none";
                 }
                 for (let i = 0; i < data.length; i++) {
                     let underman = document.createElement("li");
@@ -110,7 +109,7 @@ function buttonTemplateBuilder(reimbursement) {
         <input type="hidden" name="reimId" value="${reimbursement.id}">
         <input type="hidden" name="manName" value="${currentUser}">
     </select>
-    <input id="btn-${reimbursement.id}" class="btn-primary" type="button" placeholder="SUBMIT">`;
+    <input id="btn-${reimbursement.id}" class="btn-primary" type="button" value="CHANGE">`;
     reimButtonForm.setAttribute("name", 'submitReimStatus');
 
     return reimButtonForm;

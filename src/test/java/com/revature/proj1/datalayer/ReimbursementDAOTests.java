@@ -25,7 +25,7 @@ public class ReimbursementDAOTests {
 		tempReim.add(r2);
 		tempReim.add(r3);
 		reimImp.pushReimbursementList(tempReim);
-		reimImp.approveReimbursement(r3, 1, "User");
+		reimImp.approveReimbursement(r3.getId(), 1, "User");
 		tempReim = reimImp.grabReimbursmentList();
 	}
 	

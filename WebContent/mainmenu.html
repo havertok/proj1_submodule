@@ -15,7 +15,9 @@
     <div class="container d-flex flex-wrap justify-content-center align-items-center">
         <div class="row layout profile">
             <h3 class="inner" id="username"></h3>
-
+            <form action="logout" method="GET">
+                <input type="submit" class="btn-primary" action="logout" value="Logout">
+            </form>
             <ul class="inner">
                 <li id="fullname"></li>
                 <li id="email"></li>
@@ -43,7 +45,7 @@
         </div>
     </div>
 
-    <div id="managerView">
+    <div id="managerView" class="container">
         <div class="row">
             <div class="inner col-sm-5 layout">
                 <ul id="underlinglist">
@@ -57,8 +59,8 @@
                 </div>
             </div>
         </div>
-        <div class="container-fluid">
-            
+        <div class="row">
+
         </div>
 
     </div>
