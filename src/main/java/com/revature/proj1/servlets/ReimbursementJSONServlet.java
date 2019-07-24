@@ -52,7 +52,7 @@ public class ReimbursementJSONServlet extends HttpServlet {
 		response.getWriter().write((new ObjectMapper()).writeValueAsString(emp.getMyReimbursements()));
 	}
 	
-	//Will be called by the 
+	//
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		System.out.println("doPut ReimServlet\n");
 		String reimId = request.getReader().readLine();

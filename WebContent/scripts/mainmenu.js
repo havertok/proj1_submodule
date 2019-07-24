@@ -40,6 +40,9 @@ function getUnderlings() {
                 alert("Data response for getUnderlings was null");
             } else {
                 let underlist = document.getElementById("underlinglist");
+                if(data.length == 0){
+                    //Toggle display of manager submenu
+                }
                 for (let i = 0; i < data.length; i++) {
                     let underman = document.createElement("li");
                     let underbutton = document.createElement("input");
@@ -77,11 +80,22 @@ function getUserReims(user) {
         let reim = document.createElement("li");
         reim.innerHTML = reimTemplateBuilder(reims[i]);
         empView.appendChild(reim);
-        empView.appendChild(buttonTemplateBuilder(reims[i]));
-        empViewCont.appendChild(empView); //needs to be added to the window
-        let form = document.getElementById(`reim${reims[i].id}`).addEventListener('submit', function(){
-            sendReimPut(form); //adds a FormData request func to submit
-        })
+        empViewCont.appendChild(empView);
+        //Do not add a button if the reim is not pending
+        if (reims[i].status == 0) {
+            let reimForm = buttonTemplateBuilder(reims[i]);
+            empView.appendChild(reimForm);
+            document.getElementById(`btn-${reims[i].id}`).addEventListener('click', function(){
+                let formData = new FormData(document.forms.namedItem('submitReimStatus'));
+                console.log(formData);
+                fetch('http://localhost:8089/proj1/underlingreims', {
+                    method: 'POST',
+                    body: formData
+                }).then(
+                    getMyReims("employeeViewContainer", reims[i].empUsername)
+                )
+            })
+        }
     }
 }
 
@@ -96,25 +110,20 @@ function buttonTemplateBuilder(reimbursement) {
         <input type="hidden" name="reimId" value="${reimbursement.id}">
         <input type="hidden" name="manName" value="${currentUser}">
     </select>
-    <input class="btn-primary" type="submit">`;
-    reimButtonForm.setAttribute("id", `reim${reimbursement.id}`);
+    <input id="btn-${reimbursement.id}" class="btn-primary" type="button" placeholder="SUBMIT">`;
+    reimButtonForm.setAttribute("name", 'submitReimStatus');
+
     return reimButtonForm;
 }
 
-function sendReimPut(form) {
-    console.log("sendReimPut adding fetch funct");
-    form.onsubmit = function () {
-        let formData = new FormData(form);
-        let request = new XMLHttpRequest();
-        request.open('PUT', "http://localhost:8089/proj1/reimbursements");
-        request.send(formData);
-    };
-
-}
-
 //element is the id of the element we are adding into
+//so this can be used with multiple divs
 function getMyReims(element, username) {
-    console.log("getmyreims username=" + username);
+    //console.log("getmyreims username=" + username);
+    let clearMe = document.getElementById(element);
+    while (clearMe.firstChild) {
+        clearMe.removeChild(clearMe.firstChild);
+    }
     fetch("http://localhost:8089/proj1/reimbursements", {
         method: 'POST',
         body: username,

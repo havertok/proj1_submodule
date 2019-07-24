@@ -58,7 +58,7 @@ public class AddReimbursementServlet extends HttpServlet {
 		if(newReim != null) {
 			CompanyDBUtilities.addUpdateReim(newReim);
 		}
-		request.getRequestDispatcher("mainmenu.html").forward(request , response);
+		request.getRequestDispatcher("mainmenu.html").forward(request, response);
 	}
 
 }

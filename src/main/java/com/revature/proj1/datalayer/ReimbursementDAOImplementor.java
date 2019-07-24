@@ -68,15 +68,15 @@ public class ReimbursementDAOImplementor implements ReimbursementDAOInterface {
 		
 	}
 	
-	//Manager userName is 1, RE_ID is 2
-	public void approveReimbursement(Reimbursement r) {
-		String sql = "{call APPROVE_REIM(?,?)";
-		r.setStatus(1);
+	//Manager userName is 1, RE_ID is 2; despite being called approve, this now rejects also
+	public void approveReimbursement(int rid, int toStatus, String manName) {
+		String sql = "{call APPROVE_REIM(?,?,?)";
 		//System.out.println("===="+r.getId()+"====" + ":::" +r.getApprovingManager());
 		try (Connection conn = cF.getConnection()){
 			CallableStatement call = conn.prepareCall(sql);
-			call.setInt(1, r.getId());
-			call.setString(2, r.getApprovingManager());
+			call.setInt(1, rid);
+			call.setLong(2, toStatus);
+			call.setString(3,  manName);
 			call.execute();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

@@ -16,7 +16,5 @@ public static ConnFactory cF = ConnFactory.getInstance();
 static Logger logger = (Logger) LogManager.getLogger(); */
 public interface EmployeeDAOInterface {
 	
-	public HashMap<String, Employee> grabEmployeeMap();
-	public void pushEmployeeMap(Map<String, Employee> empMap);
 	
 }

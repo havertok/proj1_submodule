@@ -2,6 +2,8 @@ package com.revature.proj1.utils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import com.revature.proj1.beans.Employee;
 import com.revature.proj1.beans.Reimbursement;
@@ -17,16 +19,6 @@ public class CompanyDBUtilities {
 	
 	public static ReimbursementDAOImplementor getReimDAO() {
 		return new ReimbursementDAOImplementor();
-	}
-
-	public static void pushAllMaps() {
-		pushEmployeeMap();
-		pushReimbursementList();
-	}
-
-	public static void grabAllMaps() {
-		Company.employeeMap = grabEmployeeMap();
-		Company.reimbursements = grabReimbursmentList();
 	}
 
 	public static HashMap<String, Employee> grabEmployeeMap() {
@@ -45,11 +37,10 @@ public class CompanyDBUtilities {
 		getReimDAO().pushReimbursementList(Company.reimbursements);
 	}
 	
-	public static void approveReim(Reimbursement r, String manName) {
-		r.setApprovingManager(manName);
-		getReimDAO().approveReimbursement(r);
+	public static void approveReim(int rid, int toStatus, String manName) {
+		getReimDAO().approveReimbursement(rid, toStatus, manName);
 	}
-	
+
 	public static void addUpdateReim(Reimbursement r) {
 		getReimDAO().addReimbursementDB(r);
 	}
@@ -78,6 +69,12 @@ public class CompanyDBUtilities {
 		return emp;
 	}
 	
-	//TODO: Method to return full underling list, maybe.
+	//Should filter out our employee map based on whether any employee has a managerName contained within the Employee map
+	public static List<Employee> grabManagers() {
+		HashMap<String, Employee> filterMe = grabEmployeeMap();
+		ArrayList<Employee> result = (ArrayList<Employee>) filterMe.values().stream()
+				.filter(empName -> filterMe.containsKey(empName.getManagername())).collect(Collectors.toList());
+		return result;
+	}
 	
 }

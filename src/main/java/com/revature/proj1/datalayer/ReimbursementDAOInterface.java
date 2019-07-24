@@ -11,7 +11,6 @@ public interface ReimbursementDAOInterface {
 	
 	public ArrayList<Reimbursement> grabReimbursmentList();
 	public void pushReimbursementList(List<Reimbursement> reimList);
-	public void approveReimbursement(Reimbursement r);
-	public void rejectReimbursement(Reimbursement r);
+	public void approveReimbursement(int rid, int toStatus, String manName);
 	
 }
