@@ -77,4 +77,11 @@ public class CompanyDBUtilities {
 		return result;
 	}
 	
+	
+	public static List<Reimbursement> getPendingReimbursements(){
+		ArrayList<Reimbursement> filterMe = grabReimbursmentList();
+		ArrayList<Reimbursement> result = (ArrayList<Reimbursement>) filterMe.stream().filter(item -> item.getStatus() == 0)
+				.collect(Collectors.toList());
+		return result;
+	}
 }

@@ -60,6 +60,8 @@ public class LoginServlet extends HttpServlet {
 			session.setAttribute("myReimbursements", emp.getMyReimbursements());
 			session.setAttribute("underlings", emp.getUnderlings());
 			session.setAttribute("validUser", emp.getUsername());
+			//Prevents browser from caching the session
+			response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
 			response.sendRedirect("mainmenu");
 		} else {
 			session.setAttribute("validUser", "No such user or invalid password");

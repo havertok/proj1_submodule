@@ -32,8 +32,6 @@ public class ReimbursementJSONServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//response.setHeader("Cache-Control", "private, no-store, no-cache, must-revalidate"); //should disable caching
-		
-		HttpSession session = request.getSession(false);
 		String username = request.getReader().readLine();
 		System.out.println("ReimsJSON doGet: Username="+username);
 		Employee emp = CompanyDBUtilities.getEmployeeByName(username);
@@ -52,7 +50,7 @@ public class ReimbursementJSONServlet extends HttpServlet {
 		response.getWriter().write((new ObjectMapper()).writeValueAsString(emp.getMyReimbursements()));
 	}
 	
-	//
+	//Will be called by the 
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		System.out.println("doPut ReimServlet\n");
 		String reimId = request.getReader().readLine();

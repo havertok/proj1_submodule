@@ -4,7 +4,7 @@ window.onload = function () {
     fillProfile();
     getUnderlings();
 
-    
+
 }
 
 function fillProfile() {
@@ -39,8 +39,18 @@ function getUnderlings() {
             } else {
                 let underlist = document.getElementById("underlinglist");
                 let managerView = document.getElementById("managerView");
-                if(data.length == 0){
+                if (data.length == 0) {
                     managerView.style.display = "none";
+                } else {
+                    populateManagerList();
+                    document.getElementById("getPendingReims").addEventListener('click',
+                    function(){
+                        fillManagerReims("0");
+                    })
+                    document.getElementById("getApprovedReims").addEventListener('click',
+                    function(){
+                        fillManagerReims("1");
+                    })
                 }
                 for (let i = 0; i < data.length; i++) {
                     let underman = document.createElement("li");
@@ -84,7 +94,7 @@ function getUserReims(user) {
         if (reims[i].status == 0) {
             let reimForm = buttonTemplateBuilder(reims[i]);
             empView.appendChild(reimForm);
-            document.getElementById(`btn-${reims[i].id}`).addEventListener('click', function(){
+            document.getElementById(`btn-${reims[i].id}`).addEventListener('click', function () {
                 let formData = new FormData(document.forms.namedItem('submitReimStatus'));
                 console.log(formData);
                 fetch('http://localhost:8089/proj1/underlingreims', {
@@ -166,3 +176,47 @@ function reimTemplateBuilder(reimObj) {
     return lux;
 }
 
+function populateManagerList() {
+    fetch("http://localhost:8089/proj1/getunderlings", {
+        method: 'POST'
+    }).then(function (response) {
+        return response.json();
+    }).then(function (data) {
+        if (data != null) {
+            let manTable = document.getElementById('managerList');
+            for (let i = 0; i < data.length; i++) {
+                let tableRow = document.createElement("tr");
+                tableRow.setAttribute("id", `manTableData${data[i].username}`)
+                tableRow.innerHTML = 
+                   `<td id="manTableName">${data[i].fname} ${data[i].lname}</td>
+                    <td id="manTableUsername">${data[i].username}</td>
+                    <td id="manTableButton${data[i].username}" class="btn-primary">Press Me</td>`;
+                    manTable.appendChild(tableRow);
+                    document.getElementById(`manTableButton${data[i].username}`).
+                    addEventListener('click', function(){
+                        fillManagerReims(`${data[i].username}`);
+                    })
+            }
+        }
+    })
+}
+
+function fillManagerReims(determinant){
+    fetch("http://localhost:8089/proj1/listReimsByStatus", {
+        method: 'POST',
+        body: determinant,
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(function (response){
+        return response.json();
+    }).then(function (data){
+        let managerReimView = document.getElementById("reimbursementView");
+        for (let i = 0; i < data.length; i++) {
+            let reim = document.createElement("li");
+            reim.innerHTML = reimTemplateBuilder(data[i]);
+            //console.log(reim);
+            managerReimView.appendChild(reim);
+        }
+    })
+}

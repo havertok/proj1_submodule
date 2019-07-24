@@ -24,7 +24,7 @@ public class EmployeeJSONServlet extends HttpServlet {
     }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * GET gets all the subordinates
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//response.setHeader("Cache-Control", "private, no-store, no-cache, must-revalidate"); //should disable caching
@@ -36,9 +36,9 @@ public class EmployeeJSONServlet extends HttpServlet {
 	}
 
 	/**
-	 * Will be used to send out a list of underlings
+	 * POST gets all the managers
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.sendRedirect("mainmenu.html");
+		response.getWriter().write((new ObjectMapper()).writeValueAsString(CompanyDBUtilities.grabManagers()));
 	}
 }

@@ -13,7 +13,7 @@ public class Employee implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String username;
-	private String password;
+	private transient String password; //don't want this passed on
 	private String email;
 	private String fname;
 	private String lname;

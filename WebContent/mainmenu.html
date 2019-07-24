@@ -14,10 +14,12 @@
 <body>
     <div class="container d-flex flex-wrap justify-content-center align-items-center">
         <div class="row layout profile">
-            <h3 class="inner" id="username"></h3>
-            <form action="logout" method="GET">
-                <input type="submit" class="btn-primary" action="logout" value="Logout">
-            </form>
+            <div class="inner">
+                <h3 id="username"></h3>
+                <form action="logout" method="GET">
+                    <input type="submit" class="btn-primary" action="logout" value="Logout">
+                </form>
+            </div>
             <ul class="inner">
                 <li id="fullname"></li>
                 <li id="email"></li>
@@ -25,13 +27,13 @@
             </ul>
         </div>
         <div class="row layout">
-            <div class="inner col-sm-5 layout">
+            <div class="inner col-sm-5 col-md-7 layout">
                 <ul id="reimlist">
 
                 </ul>
             </div>
             <div class="col-sm-1"></div>
-            <div class="col-sm-6">
+            <div class="col-sm-6 col-md-4">
                 <h3>Submit a new Reimbursement Request</h3>
                 <form action="addnewreim" method="POST">
                     <legend>Amount:</legend>
@@ -59,8 +61,22 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-
+        <div class="row layout">
+            <div id="managerList" class="col-sm-4 inner legend">
+                <table>
+                    <tr>
+                        <th>Name</th>
+                        <th>Username</th>
+                        <th>Show Approved Reims</th>
+                    </tr>
+                </table>
+            </div>
+            <div id="reimbursementView" class="col-sm-8">
+                <span>
+                    <input class="btn-primary" type="button" id="getPendingReims">
+                    <input class="btn-primary" type="button" id="getApprovedReims">
+                </span>
+            </div>
         </div>
 
     </div>
