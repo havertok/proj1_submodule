@@ -42,6 +42,7 @@ function getUnderlings() {
                 if (data.length == 0) {
                     managerView.style.display = "none";
                 } else {
+                    //Only performs this block if he is a manager
                     populateManagerList();
                     document.getElementById("getPendingReims").addEventListener('click',
                     function(){
@@ -64,7 +65,7 @@ function getUnderlings() {
                     underbutton.setAttribute("class", `btn-primary`);
                     underbutton.innerText = data[i].username
                     underbutton.addEventListener("click", function () {
-                        getUserReims(data[i])
+                        getUserReims(data[i]);
                     });
                     //adding button to list item and list item to list
                     underman.innerText = `${data[i].fname} ${data[i].lname}`;
@@ -101,7 +102,7 @@ function getUserReims(user) {
                     method: 'POST',
                     body: formData
                 }).then(
-                    getMyReims("employeeViewContainer", reims[i].empUsername)
+                    getUserReims(reims[i].empUsername)
                 )
             })
         }
