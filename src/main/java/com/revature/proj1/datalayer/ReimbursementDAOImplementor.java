@@ -112,7 +112,7 @@ public class ReimbursementDAOImplementor implements ReimbursementDAOInterface {
 			call.execute(); //EXECUTE
 			ResultSet rs = (ResultSet) call.getObject(2);  //Convert our cursor into a result set
 			while(rs.next()) {
-				reim = new Reimbursement(rs.getString("EMP_USERNAME"), rs.getInt("STATUS"),
+				reim = new Reimbursement(rs.getString("EMP_USERNAME"), 1,
 						rs.getDouble("AMOUNT"), rs.getString("NOTES"));
 				reim.setApprovingManager(rs.getString("APPROVING_MANAGER"));
 				reim.setDateMade(rs.getDate("DATE_MADE").toLocalDate());

@@ -45,7 +45,9 @@ public class SessionServlet extends HttpServlet {
 				resp.getWriter().write("{\"session\":null}");
 			}
 		} else {
-			resp.getWriter().write("Session was null, or no such user");
+			if(session == null) {
+				resp.sendRedirect("403.html");
+			}
 		}
 	}
 

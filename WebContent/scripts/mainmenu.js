@@ -45,13 +45,13 @@ function getUnderlings() {
                     //Only performs this block if he is a manager
                     populateManagerList();
                     document.getElementById("getPendingReims").addEventListener('click',
-                    function(){
-                        fillManagerReims("0");
-                    })
+                        function () {
+                            fillManagerReims("0");
+                        })
                     document.getElementById("getApprovedReims").addEventListener('click',
-                    function(){
-                        fillManagerReims("1");
-                    })
+                        function () {
+                            fillManagerReims("1");
+                        })
                 }
                 for (let i = 0; i < data.length; i++) {
                     let underman = document.createElement("li");
@@ -97,7 +97,9 @@ function getUserReims(user) {
             empView.appendChild(reimForm);
             document.getElementById(`btn-${reims[i].id}`).addEventListener('click', function () {
                 let formData = new FormData(document.forms.namedItem('submitReimStatus'));
-                console.log(formData);
+                //This operates on the local reimlist, so we need to change this local
+                //list to reflect changes without refetching
+                reims[i].status = formData.get("toStatus") == 'accept' ? 1 : 2;
                 fetch('http://localhost:8089/proj1/underlingreims', {
                     method: 'POST',
                     body: formData
@@ -168,11 +170,25 @@ function reimTemplateBuilder(reimObj) {
     let year = reimObj.dateMade.year;
     dateString = `${day}-${month}-${year}`;
     let lux =
-        `<span> Status: ${reimObj.status} for ${reimObj.amount} <br>
-            by: ${reimObj.empUsername} on: ${dateString} <br>
-            Approving Manager: ${reimObj.status === 1 ? reimObj.approvingManager : 'N/A'}<br>
-            Reason: ${reimObj.notes}
-        </span> <br>
+        `<table border="1">
+        <tr>
+            <th>Status</th>
+            <th>Amount</th>
+            <th>Made By</th>
+            <th>Approved By</th>
+            <th>Date Made</th>
+        </tr>
+        <tr>
+            <td>${reimObj.status} </td>
+            <td>${reimObj.amount} </td>
+            <td>${reimObj.empUsername}</td>
+            <td>${reimObj.status === 1 ? reimObj.approvingManager : 'N/A'}</td>
+            <td>${dateString}</td>
+        </tr>
+        <tr>
+            ${reimObj.notes}
+        </tr>
+    </table>
         <img src="" alt="Reciept image goes here">`
     return lux;
 }
@@ -188,13 +204,13 @@ function populateManagerList() {
             for (let i = 0; i < data.length; i++) {
                 let tableRow = document.createElement("tr");
                 tableRow.setAttribute("id", `manTableData${data[i].username}`)
-                tableRow.innerHTML = 
-                   `<td id="manTableName">${data[i].fname} ${data[i].lname}</td>
+                tableRow.innerHTML =
+                    `<td id="manTableName">${data[i].fname} ${data[i].lname}</td>
                     <td id="manTableUsername">${data[i].username}</td>
                     <td id="manTableButton${data[i].username}" class="btn-primary">Press Me</td>`;
-                    manTable.appendChild(tableRow);
-                    document.getElementById(`manTableButton${data[i].username}`).
-                    addEventListener('click', function(){
+                manTable.appendChild(tableRow);
+                document.getElementById(`manTableButton${data[i].username}`).
+                    addEventListener('click', function () {
                         fillManagerReims(`${data[i].username}`);
                     })
             }
@@ -202,19 +218,22 @@ function populateManagerList() {
     })
 }
 
-function fillManagerReims(determinant){
+function fillManagerReims(determinant) {
     fetch("http://localhost:8089/proj1/listReimsByStatus", {
         method: 'POST',
         body: determinant,
         headers: {
             'Content-Type': 'application/json'
         }
-    }).then(function (response){
+    }).then(function (response) {
         return response.json();
-    }).then(function (data){
+    }).then(function (data) {
         let managerReimView = document.getElementById("reimbursementView");
+        while (managerReimView.firstChild) {
+            managerReimView.removeChild(managerReimView.firstChild);
+        }
         for (let i = 0; i < data.length; i++) {
-            let reim = document.createElement("li");
+            let reim = document.createElement("span");
             reim.innerHTML = reimTemplateBuilder(data[i]);
             //console.log(reim);
             managerReimView.appendChild(reim);

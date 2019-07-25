@@ -61,9 +61,13 @@
     width: 80vh;
 }
 
-.managerList{
-    float: left;
+#managerList{
+    float: none;
     vertical-align: top;
+}
+
+table{
+    border: 2px inset #d1e8e2;
 }
 
 body{

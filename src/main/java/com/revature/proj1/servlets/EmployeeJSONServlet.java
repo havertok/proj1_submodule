@@ -30,6 +30,9 @@ public class EmployeeJSONServlet extends HttpServlet {
 		//response.setHeader("Cache-Control", "private, no-store, no-cache, must-revalidate"); //should disable caching
 		
 		HttpSession session = request.getSession(false);
+		if(session == null) {
+			response.sendError(403);
+		}
 		String username = session.getAttribute("username").toString();
 		Employee emp = CompanyDBUtilities.getEmployeeByName(username);
 		response.getWriter().write((new ObjectMapper()).writeValueAsString(emp.getUnderlings()));
