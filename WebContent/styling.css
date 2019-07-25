@@ -4,7 +4,28 @@
     --main-inner-color: rgba(17, 100, 102, .7);
     --bright-text: #ffcb9a;
     --dark-text: #bb9b7d;
-  }  
+}
+
+table{
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 2px inset #d1e8e2;
+}
+
+body{
+    background-image: url("background.png");
+    background-size: auto;
+}
+
+legend{
+    color: #ffcb9a;
+}
+
+ul{
+    list-style: none;
+}
 
 .container{
     min-height: 100vh;
@@ -14,8 +35,28 @@
     color: #d1e8e2;
     background: var(--main-container-color);
     border-radius: 5px;
-    padding: 10px;;
+    padding: 10px;
 }
+/* Found this somewhere 
+put this the element you want to animate:
+animation: push ease-in 5s alternate infinite;
+    animation-delay: 1.5s;
+
+@keyframes push {
+    0% {
+      left: 0;
+      top: 0;
+    }
+    
+    50% {
+      left: -100px;
+      top: 100px;
+    }
+    100% {
+      top: 50px;
+      left: 50px;
+    }
+  }*/
 
 .formDiv{
     color: #d1e8e2;
@@ -56,24 +97,11 @@
     width: 80vh;
 }
 
+#companyReimView{
+    display: flex;
+}
+
 #managerList{
     float: none;
     vertical-align: top;
-}
-
-table{
-    border: 2px inset #d1e8e2;
-}
-
-body{
-    background-image: url("background.png");
-    background-size: auto;
-}
-
-legend{
-    color: #ffcb9a;
-}
-
-ul{
-    list-style: none;
 }

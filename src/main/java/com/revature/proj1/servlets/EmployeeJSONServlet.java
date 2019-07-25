@@ -43,6 +43,7 @@ public class EmployeeJSONServlet extends HttpServlet {
 	 * POST gets all the managers
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		response.getWriter().write((new ObjectMapper()).writeValueAsString(CompanyDBUtilities.grabManagers()));
 	}
 }

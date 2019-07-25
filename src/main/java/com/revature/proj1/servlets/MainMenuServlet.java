@@ -26,12 +26,13 @@ public class MainMenuServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//response.setHeader("Cache-Control", "private, no-store, no-cache, must-revalidate"); //should disable caching
+		response.setHeader("Cache-Control", "private, no-store, no-cache, must-revalidate"); //should disable caching
 		HttpSession session = request.getSession(false);
+		request.getRequestDispatcher("mainmenu.html").forward(request , response);
+		
 		if(session == null) {
 			response.sendError(403);
 		}
-		request.getRequestDispatcher("mainmenu.html").forward(request , response);
 	}
 
 	/**

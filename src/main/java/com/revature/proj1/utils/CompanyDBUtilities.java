@@ -11,7 +11,7 @@ import com.revature.proj1.beans.Reimbursement;
 import com.revature.proj1.datalayer.EmployeeDAOImplementor;
 import com.revature.proj1.datalayer.ReimbursementDAOImplementor;
 
-//This will take care of populating and pushing the maps stored in the Company utility class
+//General large service class, some unused stuff will need to be cleaned up if time permits
 public class CompanyDBUtilities {
 
 	public static EmployeeDAOImplementor getEmpDAO() {
@@ -74,19 +74,16 @@ public class CompanyDBUtilities {
 	// managerName contained within the Employee map
 	public static List<Employee> grabManagers() {
 		HashMap<String, Employee> filterMe = grabEmployeeMap();
-		HashSet<Employee> result = new HashSet<>();
+		ArrayList<Employee> result = new ArrayList<>();
 		for (Employee e : filterMe.values()) {
 			if (e.getManagername() != null) {
-				result.add(filterMe.get(e.getManagername()));
+				filterMe.get(e.getManagername()).setManager(true);
 			}
+			result.add(e);
 		}
-		ArrayList<Employee> list = new ArrayList<>(result);
-		return list;
+		return result;
 	}
-
-	public static void main(String[] args) {
-		ArrayList<Employee> test = (ArrayList<Employee>) grabManagers();
-	}
+	
 	//filtermagic that only gives us the pending reimbursements from the full list
 	public static List<Reimbursement> getPendingReimbursements() {
 		ArrayList<Reimbursement> filterMe = grabReimbursmentList();

@@ -200,17 +200,28 @@ function populateManagerList() {
         if (data != null) {
             let manTable = document.getElementById('managerList');
             for (let i = 0; i < data.length; i++) {
+                console.log(data[i]);
                 let tableRow = document.createElement("tr");
                 tableRow.setAttribute("id", `manTableData${data[i].username}`)
                 tableRow.innerHTML =
-                    `<td id="manTableName">${data[i].fname} ${data[i].lname}</td>
-                    <td id="manTableUsername">${data[i].username}</td>
-                    <td id="manTableButton${data[i].username}" class="btn-primary">Press Me</td>`;
-                manTable.appendChild(tableRow);
-                document.getElementById(`manTableButton${data[i].username}`).
-                    addEventListener('click', function () {
+                `<td id="manTableName">${data[i].fname} ${data[i].lname}</td>
+                <td id="manTableUsername">${data[i].username}</td>
+                <td id="manTableSuperior">${data[i].managername}</td>`
+                if (data[i].manager == true) {
+                    let button = document.createElement("td");
+                    button.innerHTML =
+                    `<td id="manTableButton${data[i].username}">Press Me</td>`;
+                    button.setAttribute("class", "btn-primary");
+                    button.addEventListener('click', function () {
                         fillManagerReims(`${data[i].username}`);
                     })
+                    tableRow.appendChild(button);
+                } 
+                manTable.appendChild(tableRow);
+                // document.getElementById(`manTableButton${data[i].username}`).
+                //     addEventListener('click', function () {
+                //         fillManagerReims(`${data[i].username}`);
+                //     })
             }
         }
     })
