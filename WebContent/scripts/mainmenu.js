@@ -3,8 +3,6 @@ let currentUser;
 window.onload = function () {
     fillProfile();
     getUnderlings();
-
-
 }
 
 function fillProfile() {

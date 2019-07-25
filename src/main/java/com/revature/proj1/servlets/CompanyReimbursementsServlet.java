@@ -34,7 +34,8 @@ public class CompanyReimbursementsServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * Sends either: 1 to get all approved Reims, 0 for all pending reims, and a manager name, for all reims with
+	 * an approving manager of that name (we shouldn't be able to call a man that doesn't exist)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String determinant = request.getReader().readLine();

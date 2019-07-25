@@ -10,15 +10,10 @@
     min-height: 100vh;
 }
 
-.layout, .formDiv{
-    
-}
-
 .layout{
     color: #d1e8e2;
     background: var(--main-container-color);
     border-radius: 5px;
-    box-shadow: black;
     padding: 10px;;
 }
 
@@ -26,7 +21,7 @@
     color: #d1e8e2;
     background: var(--main-container-color);
     border-radius: 5px;
-    box-shadow: black
+    padding: 10px;
 }
 
 .inner{

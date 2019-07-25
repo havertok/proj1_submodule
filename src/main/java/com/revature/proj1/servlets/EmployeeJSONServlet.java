@@ -15,8 +15,9 @@ import com.revature.proj1.utils.CompanyDBUtilities;
 
 @WebServlet("/getunderlings")
 public class EmployeeJSONServlet extends HttpServlet {
-       
-    /**
+	private static final long serialVersionUID = 1L;
+
+	/**
      * @see HttpServlet#HttpServlet()
      */
     public EmployeeJSONServlet() {

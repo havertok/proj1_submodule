@@ -6,8 +6,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.proj1.beans.Employee;
 import com.revature.proj1.utils.CompanyDBUtilities;
@@ -33,7 +31,7 @@ public class ReimbursementJSONServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//response.setHeader("Cache-Control", "private, no-store, no-cache, must-revalidate"); //should disable caching
 		String username = request.getReader().readLine();
-		System.out.println("ReimsJSON doGet: Username="+username);
+		//System.out.println("ReimsJSON doGet: Username="+username);
 		Employee emp = CompanyDBUtilities.getEmployeeByName(username);
 		//System.out.println("DoGet @ ReimbursementJSONServlet \n"+emp.getMyReimbursements());
 		response.getWriter().write((new ObjectMapper()).writeValueAsString(emp.getMyReimbursements()));
@@ -44,26 +42,10 @@ public class ReimbursementJSONServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String username = request.getReader().readLine();
-		System.out.println("ReimJSON doPost|| username="+username);
+		//System.out.println("ReimJSON doPost|| username="+username);
 		Employee emp = CompanyDBUtilities.getEmployeeByName(username);
 		
 		response.getWriter().write((new ObjectMapper()).writeValueAsString(emp.getMyReimbursements()));
-	}
-	
-	//Will be called by the 
-	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		System.out.println("doPut ReimServlet\n");
-		String reimId = request.getReader().readLine();
-		String status = request.getParameter("toStatus");
-		int toStatus = 0;
-		System.out.println("Reimid="+reimId);
-		System.out.println("ReimId="+request.getParameter("reimId"));
-		if(status.equals("accept")) {
-			toStatus = 1;
-		} else if(status.equals("reject")) {
-			toStatus = 2;
-		}
-		System.out.println("toStats="+toStatus);
 	}
 
 }
