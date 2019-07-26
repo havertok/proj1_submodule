@@ -222,7 +222,9 @@ public class ReimbursementDAOImplementor implements ReimbursementDAOInterface {
 			while(rs.next()) {
 				reimId = rs.getInt(1);
 				Blob b = rs.getBlob("BLOB_CONTENT");
-				reciept = b.getBytes(1, (int)b.length());
+				if(b != null) {
+					reciept = b.getBytes(1, (int)b.length());
+				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

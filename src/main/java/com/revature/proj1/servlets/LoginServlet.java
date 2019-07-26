@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.logging.log4j.Logger;
+
 import com.revature.proj1.beans.Credentials;
 import com.revature.proj1.beans.Employee;
 import com.revature.service.AuthenticationService;

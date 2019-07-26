@@ -9,7 +9,6 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="styling.css">
-    <link rel="icon" href="favicon.png">
 </head>
 
 <body>
@@ -67,12 +66,12 @@
             </div>
         </div>
         <div id="companyReimView" class="row layout">
-            <div id="managerList" class="container col-sm-5 inner legend">
+            <div id="allManagers" class="container col-sm-5 inner legend">
                 <span class="container">
                     <input class="btn-primary" type="button" id="getPendingReims" value="List Pending">
                     <input class="btn-primary" type="button" id="getApprovedReims" value="List Accepted">
                 </span>
-                <table>
+                <table id="managerList">
                     <tr>
                         <th>Name</th>
                         <th>Username</th>

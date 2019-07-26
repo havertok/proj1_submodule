@@ -53,6 +53,7 @@ public class AddReimbursementServlet extends HttpServlet {
 		}
 		System.out.println(newReim);
 		if(newReim != null) {
+			//Grabs an image (if there is one)
 			Part imgPart = request.getPart("image-file");
 			InputStream is = imgPart.getInputStream();
 			byte[] imgByte = new byte[is.available()];

@@ -18,6 +18,10 @@ th, td {
     border: 2px inset #d1e8e2;
 }
 
+th{
+    color: var(--bright-text);
+}
+
 body{
     background-image: url("background.png");
     background-size: auto;
@@ -41,26 +45,6 @@ ul{
     border-radius: 5px;
     padding: 10px;
 }
-/* Found this somewhere 
-put this the element you want to animate:
-animation: push ease-in 5s alternate infinite;
-    animation-delay: 1.5s;
-
-@keyframes push {
-    0% {
-      left: 0;
-      top: 0;
-    }
-    
-    50% {
-      left: -100px;
-      top: 100px;
-    }
-    100% {
-      top: 50px;
-      left: 50px;
-    }
-  }*/
 
 .formDiv{
     color: #d1e8e2;
@@ -105,7 +89,7 @@ animation: push ease-in 5s alternate infinite;
     display: flex;
 }
 
-#managerList{
+#allManager{
     float: none;
     vertical-align: top;
 }
