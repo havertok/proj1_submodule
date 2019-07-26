@@ -18,32 +18,36 @@ public class EmployeeJSONServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
-     * @see HttpServlet#HttpServlet()
-     */
-    public EmployeeJSONServlet() {
-        super();
-    }
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public EmployeeJSONServlet() {
+		super();
+	}
 
 	/**
 	 * GET gets all the subordinates
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//response.setHeader("Cache-Control", "private, no-store, no-cache, must-revalidate"); //should disable caching
-		
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// response.setHeader("Cache-Control", "private, no-store, no-cache,
+		// must-revalidate"); //should disable caching
+
 		HttpSession session = request.getSession(false);
-		if(session == null) {
+		if (session == null) {
 			response.sendError(403);
+		} else {
+			String username = session.getAttribute("username").toString();
+			Employee emp = CompanyDBUtilities.getEmployeeByName(username);
+			response.getWriter().write((new ObjectMapper()).writeValueAsString(emp.getUnderlings()));
 		}
-		String username = session.getAttribute("username").toString();
-		Employee emp = CompanyDBUtilities.getEmployeeByName(username);
-		response.getWriter().write((new ObjectMapper()).writeValueAsString(emp.getUnderlings()));
 	}
 
 	/**
 	 * POST gets all the managers
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		response.getWriter().write((new ObjectMapper()).writeValueAsString(CompanyDBUtilities.grabManagers()));
 	}
 }
