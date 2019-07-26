@@ -72,6 +72,8 @@ public class CompanyDBUtilities {
 			emp.setMyReimbursements(getReimDAO().getMyReimList(uname));
 			emp.addUnderlings(getEmpDAO().getUnderlings(uname));
 			for (Employee e : emp.getUnderlings()) {
+				//No passwords should be passed
+				e.setPassword(null);
 				e.setMyReimbursements(getReimDAO().getMyReimList(e.getUsername()));
 				e.addUnderlings(getEmpDAO().getUnderlings(e.getUsername()));
 			}

@@ -35,7 +35,7 @@ public class AddReimbursementServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("doPost AddReimServlet \n Amount:"+ request.getParameter("amount")+" notes: "+request.getParameter("notes"));
+		//System.out.println("doPost AddReimServlet \n Amount:"+ request.getParameter("amount")+" notes: "+request.getParameter("notes"));
 		generateNewReimbursement gnr = new generateNewReimbursement();
 		Reimbursement newReim = null;
 		String username;

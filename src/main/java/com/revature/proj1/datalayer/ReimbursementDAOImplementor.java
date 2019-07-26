@@ -34,6 +34,8 @@ public class ReimbursementDAOImplementor implements ReimbursementDAOInterface {
 				// Remember that id is the object's hashcode
 				reim = new Reimbursement(rs.getString("EMP_USERNAME"), rs.getInt("STATUS"), rs.getDouble("AMOUNT"),
 						rs.getString("NOTES"));
+				reim.setDateMade(rs.getDate("DATE_MADE").toLocalDate());
+				reim.setReciept(getReimImageByID(reim.getId()));
 				reimList.add(reim);
 			}
 			return reimList;
