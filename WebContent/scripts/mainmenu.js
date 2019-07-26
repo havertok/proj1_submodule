@@ -1,6 +1,7 @@
 let currentUser;
 
 window.onload = function () {
+    document.getElementById("displayModal").style.display = "none";
     fillProfile();
     getUnderlings();
 }
@@ -37,10 +38,9 @@ function getUnderlings() {
             } else {
                 let underlist = document.getElementById("underlinglist");
                 let managerViewButton = document.getElementById("displayModal");
-                if (data.length === 0) {
-                    managerViewButton.style.display = "none";
-                } else {
+                if (data.length > 0) {
                     //Only performs this block if he is a manager
+                    managerViewButton.style.display = "block";
                     populateManagerList();
                     document.getElementById("getPendingReims").addEventListener('click',
                         function () {
@@ -160,7 +160,7 @@ function getMyReims(element, username) {
             }
         })
 }
-
+//Builds a nice(ish) looking table 
 function reimTemplateBuilder(reimObj) {
     let dateString;
     let day = reimObj.dateMade.dayOfMonth;
@@ -187,7 +187,7 @@ function reimTemplateBuilder(reimObj) {
             ${reimObj.notes}
         </tr>
     </table>
-        <img src="data:image/jpg;base64,${reimObj.reciept}" alt="Reciept image goes here">`
+        <img src="data:image/jpg;base64,${reimObj.reciept}" alt="[No Image]">`
     return lux;
 }
 

@@ -90,6 +90,5 @@ ul{
 }
 
 #allManager{
-    float: none;
-    vertical-align: top;
+    margin-bottom: auto;
 }
