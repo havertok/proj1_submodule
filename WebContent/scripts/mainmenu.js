@@ -36,9 +36,9 @@ function getUnderlings() {
                 alert("Data response for getUnderlings was null");
             } else {
                 let underlist = document.getElementById("underlinglist");
-                let managerView = document.getElementById("managerView");
+                let managerViewButton = document.getElementById("displayModal");
                 if (data.length === 0) {
-                    managerView.style.display = "none";
+                    managerViewButton.style.display = "none";
                 } else {
                     //Only performs this block if he is a manager
                     populateManagerList();
