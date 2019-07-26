@@ -6,6 +6,10 @@
     --dark-text: #bb9b7d;
 }
 
+img{
+    max-height: 200px;
+}
+
 table{
     border-collapse: collapse;
 }

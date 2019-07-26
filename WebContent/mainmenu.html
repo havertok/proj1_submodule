@@ -35,11 +35,13 @@
             </div>
             <div class="col-sm-6 col-md-4">
                 <h4>Submit a new Reimbursement Request</h4>
-                <form action="addnewreim" method="POST">
+                <form action="addnewreim" method="POST" enctype="multipart/form-data">
                     <legend>Amount:</legend>
                     <input type="number" step="0.01" name="amount" id="amountInput">
                     <legend>Notes:</legend>
                     <input type="text" name="notes" id="noteInput">
+                    <legend>Image:</legend>
+                    <input name="image-file" type="file" />
                     <input name="submit" id="reimbursementRequest" class="btn btn-primary" type="submit" value="Submit">
                 </form>
             </div>

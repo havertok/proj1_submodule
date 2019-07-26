@@ -37,7 +37,7 @@ function getUnderlings() {
             } else {
                 let underlist = document.getElementById("underlinglist");
                 let managerView = document.getElementById("managerView");
-                if (data.length == 0) {
+                if (data.length === 0) {
                     managerView.style.display = "none";
                 } else {
                     //Only performs this block if he is a manager
@@ -187,7 +187,7 @@ function reimTemplateBuilder(reimObj) {
             ${reimObj.notes}
         </tr>
     </table>
-        <img src="" alt="Reciept image goes here">`
+        <img src="data:image/jpg;base64,${reimObj.reciept}" alt="Reciept image goes here">`
     return lux;
 }
 

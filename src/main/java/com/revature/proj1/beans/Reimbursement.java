@@ -20,7 +20,7 @@ public class Reimbursement implements Serializable {
 	private double amount;
 	private LocalDate dateMade; //date in format "yyyy-mm-dd"
 	private String notes;
-	private File reciept;
+	private byte[] reciept;
 	
 	//We will get and set the ID according to the SQL side's sequencer
 	//No boolean? It's not a new Reimbursement, so set the Date from the SQL
@@ -101,11 +101,11 @@ public class Reimbursement implements Serializable {
 		this.approvingManager = approvingManager;
 	}
 
-	public File getReciept() {
+	public byte[] getReciept() {
 		return reciept;
 	}
 
-	public void setReciept(File reciept) {
+	public void setReciept(byte[] reciept) {
 		this.reciept = reciept;
 	}
 

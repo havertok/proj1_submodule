@@ -1,8 +1,9 @@
 package com.revature.proj1.utils;
 
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,6 +38,10 @@ public class CompanyDBUtilities {
 	public static void pushReimbursementList() {
 		getReimDAO().pushReimbursementList(Company.reimbursements);
 	}
+	
+	public static Reimbursement getReimById(int id) {
+		return getReimDAO().getReimbursementByid(id);
+	}
 
 	public static void approveReim(int rid, int toStatus, String manName) {
 		getReimDAO().approveReimbursement(rid, toStatus, manName);
@@ -44,6 +49,10 @@ public class CompanyDBUtilities {
 
 	public static void addUpdateReim(Reimbursement r) {
 		getReimDAO().addReimbursementDB(r);
+	}
+	
+	public static void addReimImage(int id, byte[] imgByte) {
+		getReimDAO().addReimImage(id, imgByte);
 	}
 
 	public static ArrayList<Reimbursement> grabApprovedReimbursements() {

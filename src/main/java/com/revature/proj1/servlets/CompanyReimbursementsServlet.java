@@ -39,7 +39,7 @@ public class CompanyReimbursementsServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String determinant = request.getReader().readLine();
-		System.out.println("doPost CompanyReimServlet: "+determinant);
+		//System.out.println("doPost CompanyReimServlet: "+determinant);
 		if(determinant == null) {
 			response.sendRedirect("/404");
 		}

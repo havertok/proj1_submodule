@@ -1,5 +1,10 @@
 package com.revature.proj1.datalayer;
 
+import java.io.ByteArrayInputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Blob;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.Date;
@@ -46,6 +51,24 @@ public class ReimbursementDAOImplementor implements ReimbursementDAOInterface {
 		}
 	}
 	
+	public Reimbursement getReimbursementByid(int id) {
+		String sql = "SELECT * FROM REIMBURSEMENT WHERE RE_ID = ?";
+		Reimbursement reim = null;
+		try(Connection conn = cF.getConnection()){
+			PreparedStatement prep = conn.prepareStatement(sql);
+			prep.setInt(1, id);
+			ResultSet rs = prep.executeQuery();
+			while(rs.next()) {
+				//Should only return one Reim
+				reim = new Reimbursement(rs.getString("EMP_USERNAME"), rs.getInt("STATUS"),
+						rs.getDouble("AMOUNT"), rs.getString("NOTES"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return reim;
+	}
+	
 	//We can add a single reimbursement to the DB and the list
 	public void addReimbursementDB(Reimbursement r) {
 		String sql = "CALL ADD_REIMBURSEMENT(?,?,?,?,?,?)";
@@ -65,7 +88,19 @@ public class ReimbursementDAOImplementor implements ReimbursementDAOInterface {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+	}
+	
+	public void addReimImage(int id, byte[] imgByte) {
+		String sql = "INSERT INTO REIMBURSEMENT_IMAGE VALUES (?, ?, ?)";
+		try(Connection conn = cF.getConnection()){
+			PreparedStatement prep = conn.prepareStatement(sql);
+			prep.setInt(1, id);
+			prep.setString(2, null);
+			prep.setBinaryStream(3, new ByteArrayInputStream(imgByte), imgByte.length);
+			prep.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	//Manager userName is 1, RE_ID is 2; despite being called approve, this now rejects also
@@ -165,6 +200,7 @@ public class ReimbursementDAOImplementor implements ReimbursementDAOInterface {
 						rs.getDouble("AMOUNT"), rs.getString("NOTES"));
 				reim.setApprovingManager(rs.getString("APPROVING_MANAGER"));
 				reim.setDateMade(rs.getDate("DATE_MADE").toLocalDate());
+				reim.setReciept(getReimImageByID(reim.getId()));
 				reimList.add(reim);
 			}
 			return reimList;
@@ -173,6 +209,26 @@ public class ReimbursementDAOImplementor implements ReimbursementDAOInterface {
 			e.printStackTrace();
 		}
 		return reimList;
+	}
+	
+	public byte[] getReimImageByID(int id) {
+		int reimId;
+		byte[] reciept = null;
+		String sql = "SELECT * FROM REIMBURSEMENT_IMAGE WHERE REIM_ID = ?";
+		try(Connection conn = cF.getConnection()){
+			PreparedStatement prep = conn.prepareStatement(sql);
+			prep.setInt(1, id);
+			ResultSet rs = prep.executeQuery();
+			while(rs.next()) {
+				reimId = rs.getInt(1);
+				Blob b = rs.getBlob("BLOB_CONTENT");
+				reciept = b.getBytes(1, (int)b.length());
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return reciept;
 	}
 
 }
