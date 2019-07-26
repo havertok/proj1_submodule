@@ -35,6 +35,15 @@ ul{
     list-style: none;
 }
 
+.dropdown-menu{
+    background-color: var(--main-bg-color);
+    color: var(--bright-text);
+}
+
+.form-control{
+    background-color: var(--main-container-color);
+}
+
 .container{
     min-height: 100vh;
 }
@@ -87,8 +96,10 @@ ul{
 
 #companyReimView{
     display: flex;
+    position: relative;
 }
 
 #allManager{
+    position: fixed;
     margin-bottom: auto;
 }

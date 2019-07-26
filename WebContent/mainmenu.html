@@ -15,8 +15,23 @@
     <div class="container-fluid d-flex flex-wrap justify-content-center align-items-center">
         <div class="row layout profile">
             <div class="inner">
+
                 <h3 id="username"></h3>
+                <div class="dropdown">
+                    <button class="dropdown-toggle btn" data-toggle="dropdown"></button>
+                    <div class="dropdown-menu">
+                        <div class="form-group">
+                            <label>Change Password</label>
+                            <form action="password">
+                                <input type="password" name="passToChange" class="form-control" id="passwordDropDown"
+                                    placeholder="password">
+                                <input type="submit" class="btn" value="Submit Change">
+                            </form>
+                        </div>
+                    </div>
+                </div>
                 <span>
+                    <button type="submit" class="btn btn-primary">Sign in</button>
                     <form action="logout" method="GET">
                         <input type="submit" class="btn-primary" action="logout" value="Logout">
                     </form>
@@ -48,7 +63,6 @@
                     <input name="submit" id="reimbursementRequest" class="btn btn-primary" type="submit" value="Submit">
                 </form>
             </div>
-
         </div>
     </div>
 
@@ -89,6 +103,20 @@
 
             </div>
         </div>
+
+        <!-- <div class="dropdown-menu">
+            <form class="px-4 py-3">
+                <div class="form-group">
+                    <label for="">Change Password</label>
+                    <form action="">
+                        <input type="password" class="form-control" id="passwordDropDown" placeholder="password">
+                        <input type="submit" class="btn">
+                        <form action="password">
+                    </form>
+                </div>
+                <button type="submit" class="btn btn-primary">Sign in</button>
+            </form>
+        </div> -->
 
 </body>
 

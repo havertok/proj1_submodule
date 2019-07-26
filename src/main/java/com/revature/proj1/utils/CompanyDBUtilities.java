@@ -30,6 +30,10 @@ public class CompanyDBUtilities {
 	public static void pushEmployeeMap() {
 		getEmpDAO().pushEmployeeMap(Company.employeeMap);
 	}
+	
+	public static void addEmployeeDB(Employee emp) {
+		getEmpDAO().addEmployeeDB(emp);
+	}
 
 	public static ArrayList<Reimbursement> grabReimbursmentList() {
 		return getReimDAO().grabReimbursmentList();
