@@ -1,17 +1,10 @@
 package com.revature.proj1.datalayer;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-
-import java.util.HashMap;
-
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.revature.proj1.beans.Employee;
-import com.revature.proj1.beans.Reimbursement;
-import com.revature.proj1.utils.Company;
-import com.revature.proj1.utils.CompanyDBUtilities;
 
 public class EmployeeDAOTests {
 	private static EmployeeDAOImplementor empImp = new EmployeeDAOImplementor();
